@@ -2,7 +2,7 @@ import { Task } from "gantt-task-react";
 
 export const initTasks = () => {
   const currentDate = new Date();
-  const tasks: Task[] = [
+  let tasks: Task[] = [
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 1),
       end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 15),
@@ -22,7 +22,7 @@ export const initTasks = () => {
         12,
         28
       ),
-      name: "Idea",
+      name: "Problem definition",
       id: "Task 0",
       progress: 45,
       type: "task",
@@ -31,7 +31,7 @@ export const initTasks = () => {
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 2),
       end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 4, 0, 0),
-      name: "Research",
+      name: "Requirement Specification",
       id: "Task 1",
       progress: 25,
       dependencies: ["Task 0"],
@@ -41,7 +41,7 @@ export const initTasks = () => {
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 4),
       end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 8, 0, 0),
-      name: "Discussion with team",
+      name: "Project Proposal",
       id: "Task 2",
       progress: 10,
       dependencies: ["Task 1"],
@@ -51,7 +51,7 @@ export const initTasks = () => {
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 8),
       end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 9, 0, 0),
-      name: "Developing",
+      name: "project Design",
       id: "Task 3",
       progress: 2,
       dependencies: ["Task 2"],
@@ -61,7 +61,7 @@ export const initTasks = () => {
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 8),
       end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 10),
-      name: "Review",
+      name: "Project Coding",
       id: "Task 4",
       type: "task",
       progress: 70,
@@ -71,7 +71,7 @@ export const initTasks = () => {
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 15),
       end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 15),
-      name: "Release",
+      name: "Integration and Testing",
       id: "Task 6",
       progress: currentDate.getMonth(),
       type: "milestone",
@@ -81,7 +81,7 @@ export const initTasks = () => {
     {
       start: new Date(currentDate.getFullYear(), currentDate.getMonth(), 18),
       end: new Date(currentDate.getFullYear(), currentDate.getMonth(), 19),
-      name: "Party Time",
+      name: "Documentation and presentation",
       id: "Task 9",
       progress: 0,
       isDisabled: true,
@@ -106,4 +106,16 @@ export const getStartEndDateForProject = (tasks: Task[], projectId: string) => {
     }
   }
   return [start, end];
+};
+export const addTask = (tasks: Task[], task: Task) => {
+  tasks.push(task);
+  return tasks;
+};
+
+export const updateTask = (tasks: Task[], task: Task) => {
+  const taskIndex = tasks.findIndex((t) => t.id === task.id);
+  if (taskIndex >= 0) {
+    tasks[taskIndex] = task;
+  }
+  return tasks;
 };
